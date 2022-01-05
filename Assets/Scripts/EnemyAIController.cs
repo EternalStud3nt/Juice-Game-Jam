@@ -10,14 +10,11 @@ public class EnemyAIController : MonoBehaviour
     public Transform targetPos;
     public float minX, minY, maxX, maxY;
     public float changeDirDist = 0.5f;
-
-    private float PauseTime;
-
+    bool waiting;
 
     // Start is called before the first frame update
     void Start()
     {
-        PauseTime = initPauseTime;
         targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
     }
 
@@ -26,17 +23,19 @@ public class EnemyAIController : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
 
+        // if enemy has arrived at the random location
         if (Vector2.Distance(transform.position, targetPos.position) < changeDirDist)
         {
-            targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-            PauseTime = initPauseTime;
+            if(!waiting)
+                StartCoroutine(ChooseNewTargetPos());
         }
-        else
-        {
-            PauseTime -= Time.deltaTime;
-            
-        }
-            
-        
+    }
+
+    IEnumerator ChooseNewTargetPos()
+    {
+        waiting = true;
+        yield return new WaitForSeconds(initPauseTime);
+        targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        waiting = false;
     }
 }
