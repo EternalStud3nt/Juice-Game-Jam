@@ -5,29 +5,20 @@ using UnityEngine;
 public class EnemyAIController : MonoBehaviour
 {
 
-    public float speed;
-    public float initPauseTime;
-    public float minX, minY, maxX, maxY;
-    public float changeDirDist = 0.5f;
-    public float hubRadius = 5f;
-    public float attackTime = 5f;
+    [SerializeField] private float speed;
+    [SerializeField] private float initPauseTime;
+    [SerializeField] private float minX, minY, maxX, maxY;
+    [SerializeField] private float minimumTargetDiff = 0.5f;
+    [SerializeField] private float hubRadius = 5f;
+    [SerializeField] private Transform targetPos;
+    [SerializeField] private GameObject hub;
 
-    public Transform targetPos;
-
-    private Rigidbody2D rb;
-
-    public int damage = 10;
-
-    bool waiting;
-    bool attacking;
-
-
-    private GameObject hub;
+    private bool waiting;
+    private bool reachedHub;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         hub = GameObject.FindGameObjectWithTag("Hub");
         targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
     }
@@ -35,37 +26,58 @@ public class EnemyAIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, hub.transform.position) < hubRadius)
+        if (!reachedHub)
         {
-            if(!attacking)
-                StartCoroutine(DealDamage());
-        }
-       
-        // if enemy has arrived at the random location
-        if (Vector2.Distance(transform.position, targetPos.position) < changeDirDist)
-        {
+            transform.position = Vector2.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
             if (!waiting)
-                StartCoroutine(ChooseNewTargetPos());
+            {
+                if (Vector2.Distance(transform.position, hub.transform.position) <= hubRadius) // Within hub radius
+                {
+                    TargetHub();
+                }
+                else if (Vector2.Distance(transform.position, targetPos.position) < minimumTargetDiff) // if we reached our target
+                {
+                    TargetNewRandomPos();
+                }
+            }
         }
-        
-        
     }
 
-    IEnumerator ChooseNewTargetPos()
+    private void TargetNewRandomPos()
     {
-        waiting = true;
-        yield return new WaitForSeconds(initPauseTime);
-        targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-        waiting = false;
+        IEnumerator TargetNewRandomPos_Cor()
+        {
+            waiting = true;
+            yield return new WaitForSeconds(initPauseTime);
+            targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            waiting = false;
+        }
+        StartCoroutine(TargetNewRandomPos_Cor());
     }
 
-    IEnumerator DealDamage()
+    private void TargetHub()
     {
-        attacking = true;
-        yield return new WaitForSeconds(attackTime);
-        attacking = false;
+        targetPos.position = hub.transform.position;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Hub"))
+        {
+            reachedHub = true;
+            Attack();
+        }
+    }
+
+    private void Attack()
+    {
+        // deal damage to the hub
+        // Die
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(hub.transform.position, hubRadius);
+    }
 }
