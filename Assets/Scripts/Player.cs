@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,36 +7,71 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Transform pilot1;
     [SerializeField] private Transform pilot2;
+    [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float maxDistanceBetweenPilots = 3;
+    [SerializeField] private float pullPilotSpeed = 10;
 
-    private Vector3 RotationAxis { get { return currentPilot.forward; } }
     private Transform currentPilot;
+    private Transform otherPilot;
+    private bool pulling;
+    Vector2 distanceBetweenPilots;
+    private float rotationRadius;
 
     private void Start()
     {
         currentPilot = pilot1;
+        otherPilot = pilot2;
+        rotationRadius = maxDistanceBetweenPilots;
     }
 
     private void SwitchPilot()
     {
-        if(currentPilot == pilot1)
-        {
-            currentPilot = pilot2;
-            Debug.Log("Switching to pilot2");
-        }
-        else if (currentPilot == pilot2)
-        {
-            currentPilot = pilot1;
-            Debug.Log("Switching to pilot1");
-        }
+        Transform oldPilot = currentPilot;
+        currentPilot = otherPilot;
+        otherPilot = oldPilot;
+        rotationSpeed *= -1;
     }
 
     private void Update()
     {
+        distanceBetweenPilots = currentPilot.position - otherPilot.position;
         if (Input.GetButtonDown("Jump"))
         {
             SwitchPilot();
         }
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (distanceBetweenPilots.magnitude > 0.5f)
+            {
+                PullOtherPilot();
+            }
+        }
+        else if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            pulling = false;
+        }
+
+        if (distanceBetweenPilots.magnitude < maxDistanceBetweenPilots && !pulling)
+        {
+            PushOtherPilot();
+        }
+        
+
+        lineRenderer.SetPosition(0, currentPilot.position);
+        lineRenderer.SetPosition(1, otherPilot.position);
+    }
+
+    private void PullOtherPilot()
+    {
+        pulling = true;
+        rotationRadius -= pullPilotSpeed * Time.deltaTime;
+    }
+
+    private void PushOtherPilot()
+    {
+        print("Pulling");
+        rotationRadius += pullPilotSpeed * Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -45,6 +81,11 @@ public class Player : MonoBehaviour
 
     private void UpdateRotation()
     {
-        transform.Rotate(RotationAxis, rotationSpeed * Time.deltaTime);
+        otherPilot.position = currentPilot.position + new Vector3(rotationRadius * Mathf.Cos(Time.time * Time.deltaTime * rotationSpeed), rotationRadius * Mathf.Sin(Time.time * Time.deltaTime * rotationSpeed)) ;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(pilot1.position, maxDistanceBetweenPilots);
     }
 }
