@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class EnemyAIController : MonoBehaviour
 {
-
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float initPauseTime;
     [SerializeField] private float minX, minY, maxX, maxY;
     [SerializeField] private float minimumTargetDiff = 0.5f;
-    [SerializeField] private float hubRadius = 5f;
     [SerializeField] private Transform targetPos;
-    [SerializeField] private GameObject hub;
-
     private bool waiting;
+
+    [Header("Hub")]
+    [SerializeField] private float deathTime;
+    [SerializeField] private float hubRadius = 5f;
+    [SerializeField] private int damage = 10;
+    [SerializeField] private GameObject hub;
+    [SerializeField] private GameObject deathParticles;
     private bool reachedHub;
+
+    [Header("Other")]
+    [SerializeField] private GameObject enemySpawner;
 
     // Start is called before the first frame update
     void Start()
     {
         hub = GameObject.FindGameObjectWithTag("Hub");
+        targetPos.SetParent(null, true);
         targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (!reachedHub)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
@@ -71,8 +80,21 @@ public class EnemyAIController : MonoBehaviour
 
     private void Attack()
     {
-        // deal damage to the hub
-        // Die
+        hub.GetComponent<HubController>().TakeDamage(damage);
+        Die();
+    }
+
+    private void Die()
+    {
+        IEnumerator Die_Cor()
+        {
+            // TO DO: Play Death Animation, Play Sound Effects, ...
+            yield return new WaitForSeconds(deathTime);
+            enemySpawner.GetComponent<EnemySpawner>().decAICount();
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+        StartCoroutine(Die_Cor());
     }
 
     private void OnDrawGizmos()
