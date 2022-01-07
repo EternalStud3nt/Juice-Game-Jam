@@ -36,6 +36,20 @@ public class Player : MonoBehaviour
     private void Update()
     {
         distanceBetweenPilots = currentPilot.position - otherPilot.position;
+
+        HandleInput();
+
+        if (distanceBetweenPilots.magnitude < maxDistanceBetweenPilots && !pulling)
+        {
+            PushOtherPilot();
+        }
+
+        lineRenderer.SetPosition(0, currentPilot.position);
+        lineRenderer.SetPosition(1, otherPilot.position);
+    }
+
+    private void HandleInput()
+    {
         if (Input.GetButtonDown("Jump"))
         {
             SwitchPilot();
@@ -51,15 +65,10 @@ public class Player : MonoBehaviour
         {
             pulling = false;
         }
-
-        if (distanceBetweenPilots.magnitude < maxDistanceBetweenPilots && !pulling)
+        if (Input.GetMouseButton(0))
         {
-            PushOtherPilot();
+            JuiceMeter.AddJuice(1);
         }
-        
-
-        lineRenderer.SetPosition(0, currentPilot.position);
-        lineRenderer.SetPosition(1, otherPilot.position);
     }
 
     private void PullOtherPilot()
