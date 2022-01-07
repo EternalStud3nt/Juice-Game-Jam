@@ -4,31 +4,37 @@ using UnityEngine;
 
 public class EnemyAIController : MonoBehaviour
 {
-
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float initPauseTime;
-    [SerializeField] private float deathTime;
     [SerializeField] private float minX, minY, maxX, maxY;
     [SerializeField] private float minimumTargetDiff = 0.5f;
+    [SerializeField] private Transform targetPos;
+    private bool waiting;
+
+    [Header("Hub")]
+    [SerializeField] private float deathTime;
     [SerializeField] private float hubRadius = 5f;
     [SerializeField] private int damage = 10;
-    [SerializeField] private Transform targetPos;
     [SerializeField] private GameObject hub;
     [SerializeField] private GameObject deathParticles;
-
-    private bool waiting;
     private bool reachedHub;
+
+    [Header("Other")]
+    [SerializeField] private GameObject enemySpawner;
 
     // Start is called before the first frame update
     void Start()
     {
         hub = GameObject.FindGameObjectWithTag("Hub");
+        targetPos.SetParent(null, true);
         targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (!reachedHub)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
@@ -84,6 +90,7 @@ public class EnemyAIController : MonoBehaviour
         {
             // TO DO: Play Death Animation, Play Sound Effects, ...
             yield return new WaitForSeconds(deathTime);
+            enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
