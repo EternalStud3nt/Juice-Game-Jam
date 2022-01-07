@@ -7,11 +7,14 @@ public class EnemyAIController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private float initPauseTime;
+    [SerializeField] private float deathTime;
     [SerializeField] private float minX, minY, maxX, maxY;
     [SerializeField] private float minimumTargetDiff = 0.5f;
     [SerializeField] private float hubRadius = 5f;
+    [SerializeField] private int damage = 10;
     [SerializeField] private Transform targetPos;
     [SerializeField] private GameObject hub;
+    [SerializeField] private GameObject deathParticles;
 
     private bool waiting;
     private bool reachedHub;
@@ -71,8 +74,20 @@ public class EnemyAIController : MonoBehaviour
 
     private void Attack()
     {
-        // deal damage to the hub
-        // Die
+        hub.GetComponent<HubController>().TakeDamage(damage);
+        Die();
+    }
+
+    private void Die()
+    {
+        IEnumerator Die_Cor()
+        {
+            // TO DO: Play Death Animation, Play Sound Effects, ...
+            yield return new WaitForSeconds(deathTime);
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+        StartCoroutine(Die_Cor());
     }
 
     private void OnDrawGizmos()
