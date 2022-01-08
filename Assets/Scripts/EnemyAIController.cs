@@ -76,6 +76,10 @@ public class EnemyAIController : MonoBehaviour
             reachedHub = true;
             Attack();
         }
+        if (collision.collider.CompareTag("Pilot"))
+        {
+            Die();
+        }
     }
 
     private void Attack()
