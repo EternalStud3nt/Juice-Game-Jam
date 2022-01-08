@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float maxDistanceBetweenPilots = 3;
     [SerializeField] private float pullPilotSpeed = 10;
+    [SerializeField] new private CinemachineVirtualCamera camera;
 
     private Transform currentPilot;
     private Transform otherPilot;
@@ -23,6 +25,8 @@ public class Player : MonoBehaviour
         currentPilot = pilot1;
         otherPilot = pilot2;
         rotationRadius = maxDistanceBetweenPilots;
+        Instantiate(camera.gameObject);
+        camera.Follow = currentPilot;
     }
 
     private void SwitchPilot()
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
         currentPilot = otherPilot;
         otherPilot = oldPilot;
         rotationSpeed *= -1;
+        camera.Follow = currentPilot;
     }
 
     private void Update()
@@ -92,6 +97,7 @@ public class Player : MonoBehaviour
     {
         otherPilot.position = currentPilot.position + new Vector3(rotationRadius * Mathf.Cos(Time.time * Time.deltaTime * rotationSpeed), rotationRadius * Mathf.Sin(Time.time * Time.deltaTime * rotationSpeed)) ;
     }
+
 
     private void OnDrawGizmos()
     {

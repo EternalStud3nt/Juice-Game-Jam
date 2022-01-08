@@ -84,7 +84,7 @@ public class EnemyAIController : MonoBehaviour
         Die();
     }
 
-    private void Die()
+    public void Die()
     {
         IEnumerator Die_Cor()
         {
