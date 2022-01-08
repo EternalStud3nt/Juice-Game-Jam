@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,17 +19,19 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private GameObject hub;
     [SerializeField] private GameObject deathParticles;
-    private bool reachedHub;
 
     [Header("Other")]
     [SerializeField] private GameObject enemySpawner;
+
+    private bool reachedHub;
+    public static Action OnDeath;
 
     // Start is called before the first frame update
     void Start()
     {
         hub = GameObject.FindGameObjectWithTag("Hub");
         targetPos.SetParent(null, true);
-        targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        targetPos.position = new Vector2(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY));
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class EnemyAIController : MonoBehaviour
         {
             waiting = true;
             yield return new WaitForSeconds(initPauseTime);
-            targetPos.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            targetPos.position = new Vector2(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY));
             waiting = false;
         }
         StartCoroutine(TargetNewRandomPos_Cor());
@@ -78,7 +81,6 @@ public class EnemyAIController : MonoBehaviour
         }
         if (collision.collider.CompareTag("Pilot"))
         {
-            Debug.Log("I found a pilot");
             Die(true);
         }
     }
@@ -95,6 +97,7 @@ public class EnemyAIController : MonoBehaviour
         {
             // TO DO: Play Death Animation, Play Sound Effects, ...
             yield return new WaitForSeconds(deathTime);
+            OnDeath?.Invoke();
             enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
@@ -103,6 +106,7 @@ public class EnemyAIController : MonoBehaviour
             StartCoroutine(Die_Cor());
         else
         {
+            OnDeath?.Invoke();
             enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(this.gameObject);

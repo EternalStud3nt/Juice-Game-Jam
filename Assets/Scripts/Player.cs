@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            JuiceMeter.AddJuice(1);
+            JuiceMeter.AddJuice();
         }
     }
 
@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
 
     private void PushOtherPilot()
     {
-        print("Pulling");
         rotationRadius += pullPilotSpeed * Time.deltaTime;
     }
 

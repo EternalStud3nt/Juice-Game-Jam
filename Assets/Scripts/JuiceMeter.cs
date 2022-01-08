@@ -10,14 +10,24 @@ public class JuiceMeter : MonoBehaviour
     private static float juice;
     private const float maxJuice = 1000;
     public static float JuicePercent { get { return juice / maxJuice; } }
-    
-    public static void AddJuice(float amount)
+
+    private void Awake()
     {
-        juice += amount;
+        EnemyAIController.OnDeath += AddJuice;
+    }
+
+    public static void AddJuice()
+    {
+        juice += 50;
     }
 
     private void Update()
     {
         juice_UI.fillAmount = JuicePercent;
+    }
+
+    private void OnDisable()
+    {
+        EnemyAIController.OnDeath -= AddJuice;
     }
 }
