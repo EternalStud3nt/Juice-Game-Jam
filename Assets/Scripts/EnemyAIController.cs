@@ -78,7 +78,8 @@ public class EnemyAIController : MonoBehaviour
         }
         if (collision.collider.CompareTag("Pilot"))
         {
-            Die();
+            Debug.Log("I found a pilot");
+            Die(true);
         }
     }
 
@@ -88,7 +89,7 @@ public class EnemyAIController : MonoBehaviour
         Die();
     }
 
-    public void Die()
+    public void Die(bool instant = false)
     {
         IEnumerator Die_Cor()
         {
@@ -98,7 +99,14 @@ public class EnemyAIController : MonoBehaviour
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
-        StartCoroutine(Die_Cor());
+        if(!instant)
+            StartCoroutine(Die_Cor());
+        else
+        {
+            enemySpawner.GetComponent<EnemySpawner>().decAICount();
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDrawGizmos()
