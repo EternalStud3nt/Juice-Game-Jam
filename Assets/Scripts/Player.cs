@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float maxDistanceBetweenPilots = 3;
     [SerializeField] private float pullPilotSpeed = 10;
-    [SerializeField] new private CinemachineVirtualCamera camera;
+    [SerializeField] Cinemachine.CinemachineVirtualCamera virCam;
 
     public bool takeInput;
 
@@ -28,8 +28,6 @@ public class Player : MonoBehaviour
         currentPilot = pilot1;
         otherPilot = pilot2;
         rotationRadius = maxDistanceBetweenPilots;
-        Instantiate(camera.gameObject);
-        camera.Follow = currentPilot;
     }
 
     private void SwitchPilot()
@@ -38,7 +36,6 @@ public class Player : MonoBehaviour
         currentPilot = otherPilot;
         otherPilot = oldPilot;
         rotationSpeed *= -1;
-        camera.Follow = currentPilot;
     }
 
     private void Update()

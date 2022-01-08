@@ -81,8 +81,7 @@ MonoBehaviour:
   maxY: 24
   minimumTargetDiff: 0.5
   targetPos: {fileID: 3426379637026006194}
-  deathTime: 2
-  hubRadius: 2
+  deathTime: 0.5
   damage: 10
   hub: {fileID: 5899299901581912553, guid: 5ca8f18b0e60af945affde9d04975722, type: 3}
   deathParticles: {fileID: 8431566253753786992, guid: 7e129bd40f4f6c54593c630e0dbb7490, type: 3}

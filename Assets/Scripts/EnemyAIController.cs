@@ -22,6 +22,8 @@ public class EnemyAIController : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject enemySpawner;
 
+
+    private RipplePostProcessor ripplePostProcessor;
     private bool reachedHub;
     private float hubRadius;
     public static Action OnDeath;
@@ -33,6 +35,7 @@ public class EnemyAIController : MonoBehaviour
         hub = GameObject.FindGameObjectWithTag("Hub");
         targetPos.SetParent(null, true);
         targetPos.position = new Vector2(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY));
+        ripplePostProcessor = Camera.main.GetComponent<RipplePostProcessor>();
     }
 
     // Update is called once per frame
@@ -108,6 +111,7 @@ public class EnemyAIController : MonoBehaviour
             StartCoroutine(Die_Cor());
         else
         {
+            ripplePostProcessor.RippleEffect();
             OnDeath?.Invoke();
             enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);

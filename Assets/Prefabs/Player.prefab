@@ -294,7 +294,7 @@ MonoBehaviour:
   rotationSpeed: 500
   maxDistanceBetweenPilots: 3.78
   pullPilotSpeed: 10
-  camera: {fileID: 9068088304813903905, guid: cc3c6da511884bc49aa6d110cc25ed2c, type: 3}
+  camera: {fileID: 2285353558875521253, guid: 1bc1993f59651b845b848f307860c654, type: 3}
   takeInput: 0
 --- !u!120 &718913321279311662
 LineRenderer:
