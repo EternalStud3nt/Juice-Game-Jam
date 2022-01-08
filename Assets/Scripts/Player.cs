@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float pullPilotSpeed = 10;
     [SerializeField] new private CinemachineVirtualCamera camera;
 
+    public bool takeInput;
+
     private Transform currentPilot;
     private Transform otherPilot;
     private bool pulling;
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        takeInput = true;
         currentPilot = pilot1;
         otherPilot = pilot2;
         rotationRadius = maxDistanceBetweenPilots;
@@ -55,25 +58,29 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (takeInput)
         {
-            SwitchPilot();
-        }
-        else if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (distanceBetweenPilots.magnitude > 0.5f)
+            if (Input.GetButtonDown("Jump"))
             {
-                PullOtherPilot();
+                SwitchPilot();
+            }
+            else if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (distanceBetweenPilots.magnitude > 0.5f)
+                {
+                    PullOtherPilot();
+                }
+            }
+            else if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                pulling = false;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                JuiceMeter.AddJuice();
             }
         }
-        else if (!Input.GetKey(KeyCode.LeftShift))
-        {
-            pulling = false;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            JuiceMeter.AddJuice();
-        }
+        
     }
 
     private void PullOtherPilot()

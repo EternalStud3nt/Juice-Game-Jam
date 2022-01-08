@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Hub
   - Pilot
+  - Spawner
   layers:
   - Default
   - TransparentFX

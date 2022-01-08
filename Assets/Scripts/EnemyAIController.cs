@@ -15,7 +15,6 @@ public class EnemyAIController : MonoBehaviour
 
     [Header("Hub")]
     [SerializeField] private float deathTime;
-    [SerializeField] private float hubRadius = 5f;
     [SerializeField] private int damage = 10;
     [SerializeField] private GameObject hub;
     [SerializeField] private GameObject deathParticles;
@@ -24,11 +23,13 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] private GameObject enemySpawner;
 
     private bool reachedHub;
+    private float hubRadius;
     public static Action OnDeath;
 
     // Start is called before the first frame update
     void Start()
     {
+        hubRadius = hub.GetComponent<HubController>().hubRadius;
         hub = GameObject.FindGameObjectWithTag("Hub");
         targetPos.SetParent(null, true);
         targetPos.position = new Vector2(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY));
@@ -100,6 +101,7 @@ public class EnemyAIController : MonoBehaviour
             OnDeath?.Invoke();
             enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
         }
         if(!instant)
@@ -109,13 +111,10 @@ public class EnemyAIController : MonoBehaviour
             OnDeath?.Invoke();
             enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(hub.transform.position, hubRadius);
-    }
+   
 }

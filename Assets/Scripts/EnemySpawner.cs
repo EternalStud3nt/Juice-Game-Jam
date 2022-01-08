@@ -10,12 +10,15 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int enemyCount = 0;
     [SerializeField] private GameObject[] enemies;
 
+    public bool spawnEnemies;
+
     private int ind;
     private Vector2 spawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnEnemies = true;
         ind = Random.Range(0, enemies.Length);
         SpawnEnemy();
     }
@@ -37,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnPause);
             SpawnEnemy();
         }
-        if(enemyCount < 60)
+        if(enemyCount < 60 && spawnEnemies)
         {
             StartCoroutine(SpawnEnemy_Cor());
         }

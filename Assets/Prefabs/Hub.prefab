@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4273268080b804cb6b39365bf70e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 0}
+  hubRadius: 5
   initHealth: 100
 --- !u!58 &5899299901581912551
 CircleCollider2D:
