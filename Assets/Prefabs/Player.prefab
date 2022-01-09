@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 718913321279311663}
   - component: {fileID: 718913321279311660}
   - component: {fileID: 718913321279311662}
+  - component: {fileID: 1448675465}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -480,6 +481,7 @@ MonoBehaviour:
   maxDistanceBetweenPilots: 3.78
   pullPilotSpeed: 10
   virCam: {fileID: 0}
+  camAnim: {fileID: 1448675465}
   takeInput: 0
 --- !u!120 &718913321279311662
 LineRenderer:
@@ -579,3 +581,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &1448675465
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718913321279311661}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2c445bec22cb894fb4b46595aa8e4d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

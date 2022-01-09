@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxDistanceBetweenPilots = 3;
     [SerializeField] private float pullPilotSpeed = 10;
     [SerializeField] Cinemachine.CinemachineVirtualCamera virCam;
+    [SerializeField] private Animator camAnim;
 
     public bool takeInput;
     public static Action<Transform> OnSwitch;
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour
     private bool pulling;
     Vector2 distanceBetweenPilots;
     private float rotationRadius;
+
+    private void Awake()
+    {
+        EnemyAIController.OnDeath += Screenshake;
+    }
 
     private void Start()
     {
@@ -116,6 +122,11 @@ public class Player : MonoBehaviour
         currentPilot.position = spawnPoint.position;
     }
 
+    private void Screenshake()
+    {
+        camAnim.SetTrigger("shakeCam");
+    }
+
     public void SickoMode()
     {
         IEnumerator SickoMode_Cor()
@@ -134,5 +145,10 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(pilot1.position, maxDistanceBetweenPilots);
+    }
+
+    private void OnDisable()
+    {
+        EnemyAIController.OnDeath -= Screenshake;
     }
 }
