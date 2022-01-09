@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Transform pilot1;
     [SerializeField] private Transform pilot2;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float maxDistanceBetweenPilots = 3;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] Cinemachine.CinemachineVirtualCamera virCam;
 
     public bool takeInput;
+    public static Action OnSwitch;
 
     private Transform currentPilot;
     private Transform otherPilot;
@@ -28,10 +30,12 @@ public class Player : MonoBehaviour
         currentPilot = pilot1;
         otherPilot = pilot2;
         rotationRadius = maxDistanceBetweenPilots;
+        currentPilot.position = spawnPoint.position;
     }
 
     private void SwitchPilot()
     {
+        OnSwitch.Invoke();
         Transform oldPilot = currentPilot;
         currentPilot = otherPilot;
         otherPilot = oldPilot;
@@ -99,6 +103,11 @@ public class Player : MonoBehaviour
     private void UpdateRotation()
     {
         otherPilot.position = currentPilot.position + new Vector3(rotationRadius * Mathf.Cos(Time.time * Time.deltaTime * rotationSpeed), rotationRadius * Mathf.Sin(Time.time * Time.deltaTime * rotationSpeed)) ;
+    }
+
+    public void Respawn()
+    {
+        currentPilot.position = spawnPoint.position;
     }
 
 
