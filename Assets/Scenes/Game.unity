@@ -382,6 +382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4439806703594031799, guid: 889b6121b3c461e45a68f2959cd98823, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 297781756}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889b6121b3c461e45a68f2959cd98823, type: 3}
 --- !u!1001 &1418815341
@@ -529,18 +533,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1630703427, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: orthographic size
-      value: 33.4209
+    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
+      propertyPath: maxScale.x
+      value: 2.7
       objectReference: {fileID: 0}
-    - target: {fileID: 1630703428, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.3
+    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
+      propertyPath: maxScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
+      propertyPath: maxScale.z
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1055250605}
+    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
+      propertyPath: maxRotationSpeed
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
+      propertyPath: minRotationSpeed
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 718913321279311661, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: m_Name
       value: Player
@@ -598,6 +614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 413457684, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 413457689, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
       propertyPath: player
       value: 
@@ -646,11 +666,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5857314102308948185, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857314102308948185, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857314102308948185, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.13333334
+      objectReference: {fileID: 0}
     - target: {fileID: 5857314102308948186, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 413457684, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2c47d2a943fd6ec4b8dd501f9e59a93b, type: 3}
 --- !u!4 &1915552341 stripped
 Transform:

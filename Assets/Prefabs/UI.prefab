@@ -355,3 +355,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   juice_UI: {fileID: 4439806703506729482}
+  player: {fileID: 0}

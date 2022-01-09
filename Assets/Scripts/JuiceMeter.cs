@@ -11,6 +11,8 @@ public class JuiceMeter : MonoBehaviour
     private const float maxJuice = 1000;
     public static float JuicePercent { get { return juice / maxJuice; } }
 
+     [SerializeField] Player player;
+
     private void Awake()
     {
         EnemyAIController.OnDeath += AddJuice;
@@ -24,6 +26,10 @@ public class JuiceMeter : MonoBehaviour
     private void Update()
     {
         juice_UI.fillAmount = JuicePercent;
+        if(juice == maxJuice)
+        {
+            player.SickoMode();
+        }
     }
 
     private void OnDisable()
