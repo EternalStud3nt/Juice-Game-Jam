@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 1, g: 0.5668092, b: 0.514151, a: 1}
+  m_Color: {r: 0.990566, g: 0.39273202, b: 0.36912602, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -534,29 +534,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: maxScale.x
-      value: 2.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: maxScale.y
-      value: 2.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: maxScale.z
-      value: 2.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1055250605}
-    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: maxRotationSpeed
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 718913321279311660, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
-      propertyPath: minRotationSpeed
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 718913321279311661, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: m_Name
       value: Player
@@ -567,11 +547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 718913321279311663, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 718913321279311663, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 718913321279311663, guid: adc08de48cc892a4dbf94d1ecdfe8f12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -825,6 +805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 4305151723932952513, guid: 399b4c528ad86c042af4a73a30fe7110, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4305151723986503796, guid: 399b4c528ad86c042af4a73a30fe7110, type: 3}
       propertyPath: m_Name
       value: RestartButton
@@ -880,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7451141761977758243, guid: ea616765dffc1894f840d3ffcb08f482, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7451141761977758243, guid: ea616765dffc1894f840d3ffcb08f482, type: 3}
       propertyPath: m_LocalPosition.z
