@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] Cinemachine.CinemachineVirtualCamera virCam;
 
     public bool takeInput;
-    public static Action OnSwitch;
+    public static Action<Transform> OnSwitch;
 
     private Transform currentPilot;
     private Transform otherPilot;
@@ -31,15 +31,15 @@ public class Player : MonoBehaviour
         otherPilot = pilot2;
         rotationRadius = maxDistanceBetweenPilots;
         currentPilot.position = spawnPoint.position;
+        OnSwitch.Invoke(currentPilot);
     }
 
     private void SwitchPilot()
     {
-        OnSwitch.Invoke();
         Transform oldPilot = currentPilot;
         currentPilot = otherPilot;
         otherPilot = oldPilot;
-        rotationSpeed *= -1;
+        OnSwitch.Invoke(currentPilot);
     }
 
     private void Update()
@@ -109,7 +109,6 @@ public class Player : MonoBehaviour
     {
         currentPilot.position = spawnPoint.position;
     }
-
 
     private void OnDrawGizmos()
     {

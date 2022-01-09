@@ -15,7 +15,7 @@ public class RegionManager : MonoBehaviour
         Player.OnSwitch += setSwitched;
     }
 
-    public void setSwitched()
+    public void setSwitched(Transform t)
     {
         IEnumerator setSwitched_Cor()
         {
