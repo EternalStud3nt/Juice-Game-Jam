@@ -20,13 +20,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float pullPilotSpeed = 10;
     [SerializeField] Cinemachine.CinemachineVirtualCamera virCam;
     [SerializeField] private Animator camAnim;
+    [SerializeField] private GameObject mainMenuUI;
 
     public bool takeInput;
     public static Action<Transform> OnSwitch;
+    public static Action OnStart;
 
     private Transform currentPilot;
     private Transform otherPilot;
     private bool pulling;
+    private bool startGame;
     Vector2 distanceBetweenPilots;
     private float rotationRadius;
 
@@ -37,6 +40,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        mainMenuUI.SetActive(true);
+        startGame = true;
         takeInput = true;
         currentPilot = pilot1;
         otherPilot = pilot2;
@@ -75,6 +80,13 @@ public class Player : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
+                if (startGame)
+                {
+                    mainMenuUI.SetActive(false);
+                    OnStart?.Invoke();
+                    camAnim.SetTrigger("zoomOut");
+                    startGame = false;
+                }
                 SwitchPilot();
             }
             else if (Input.GetKey(KeyCode.LeftShift))

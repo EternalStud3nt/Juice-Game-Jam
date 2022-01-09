@@ -17,6 +17,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        
     }
 
     private void LateUpdate()

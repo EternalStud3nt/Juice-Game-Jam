@@ -15,12 +15,18 @@ public class EnemySpawner : MonoBehaviour
     private int ind;
     private Vector2 spawnPoint;
 
+    Player player;
+
+    private void Awake()
+    {
+        Player.OnStart += SpawnEnemy;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         spawnEnemies = true;
         ind = Random.Range(0, enemies.Length);
-        SpawnEnemy();
     }
 
     // Update is called once per frame
@@ -59,5 +65,10 @@ public class EnemySpawner : MonoBehaviour
     public void decAICount()
     {
         enemyCount--;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnStart -= SpawnEnemy;
     }
 }
