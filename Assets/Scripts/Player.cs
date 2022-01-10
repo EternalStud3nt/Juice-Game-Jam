@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
     private float msScale;
     private bool sicko;
 
-
     private void Awake()
     {
         EnemyAIController.OnDeath += Screenshake;
@@ -177,6 +176,7 @@ public class Player : MonoBehaviour
             pilot1.localScale = minScale;
             pilot2.localScale = minScale;
             sicko = false;
+            JuiceMeter.ResetJuice();
         }
         StartCoroutine(SickoMode_Cor());
     }

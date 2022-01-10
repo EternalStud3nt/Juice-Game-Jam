@@ -417,26 +417,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4568185775549828740, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
-      propertyPath: enemyCount
-      value: -89
-      objectReference: {fileID: 0}
-    - target: {fileID: 4568185775549828740, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
-      propertyPath: enemies.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4568185775549828740, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
-      propertyPath: enemies.Array.data[1]
-      value: 
-      objectReference: {fileID: 7445668835807060006, guid: 20223a0bb08697840a342b179a45f4ce, type: 3}
-    - target: {fileID: 4568185775549828740, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
-      propertyPath: enemies.Array.data[2]
-      value: 
-      objectReference: {fileID: 7445668835807060006, guid: b86cb06d831be9a4b96b7a9643336841, type: 3}
-    - target: {fileID: 4568185775549828740, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
-      propertyPath: enemies.Array.data[3]
-      value: 
-      objectReference: {fileID: 7445668835807060006, guid: 39d416d523d82a04fad86e8cf2fa9d39, type: 3}
     - target: {fileID: 4568185775549828742, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
       propertyPath: m_Name
       value: EnemySpawner

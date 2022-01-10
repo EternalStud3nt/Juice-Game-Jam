@@ -51,4 +51,7 @@ MonoBehaviour:
   enemyCount: 0
   enemies:
   - {fileID: 1606815605373255470, guid: 867ca4997d0288d4ab4309cf38c1fac1, type: 3}
+  - {fileID: 7445668835807060006, guid: 20223a0bb08697840a342b179a45f4ce, type: 3}
+  - {fileID: 7445668835807060006, guid: b86cb06d831be9a4b96b7a9643336841, type: 3}
+  - {fileID: 7445668835807060006, guid: 39d416d523d82a04fad86e8cf2fa9d39, type: 3}
   spawnEnemies: 0
