@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,9 @@ public class JuiceMeter : MonoBehaviour
     private static float juice;
     private const float maxJuice = 1000;
     public static float JuicePercent { get { return juice / maxJuice; } }
+    public static Action OnSickoMode;
 
-     [SerializeField] Player player;
+    [SerializeField] Player player;
 
     private void Awake()
     {
@@ -29,7 +31,9 @@ public class JuiceMeter : MonoBehaviour
         if(juice == maxJuice)
         {
             player.SickoMode();
+            OnSickoMode?.Invoke();
         }
+       
     }
 
     private void OnDisable()

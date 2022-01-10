@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     private float msScale;
     private bool sicko;
 
+
     private void Awake()
     {
         EnemyAIController.OnDeath += Screenshake;
