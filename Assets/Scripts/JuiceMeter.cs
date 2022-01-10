@@ -18,6 +18,13 @@ public class JuiceMeter : MonoBehaviour
     private void Awake()
     {
         EnemyAIController.OnDeath += AddJuice;
+        Player.OnStart += Enable;
+        gameObject.SetActive(false);
+    }
+
+    private void Enable()
+    {
+        gameObject.SetActive(true);
     }
 
     public static void AddJuice()
