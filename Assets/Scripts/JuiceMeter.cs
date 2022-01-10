@@ -36,6 +36,11 @@ public class JuiceMeter : MonoBehaviour
        
     }
 
+    public static void ResetJuice()
+    {
+        juice = 0;
+    }
+
     private void OnDisable()
     {
         EnemyAIController.OnDeath -= AddJuice;

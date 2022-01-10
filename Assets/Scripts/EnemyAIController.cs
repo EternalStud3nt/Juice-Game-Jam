@@ -102,7 +102,6 @@ public class EnemyAIController : MonoBehaviour
             // TO DO: Play Death Animation, Play Sound Effects, ...
             yield return new WaitForSeconds(deathTime);
             OnDeath?.Invoke();
-            enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
@@ -113,7 +112,6 @@ public class EnemyAIController : MonoBehaviour
         {
             ripplePostProcessor.RippleEffect();
             OnDeath?.Invoke();
-            enemySpawner.GetComponent<EnemySpawner>().decAICount();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(targetPos.gameObject);
             Destroy(this.gameObject);

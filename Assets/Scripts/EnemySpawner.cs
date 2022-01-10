@@ -15,11 +15,11 @@ public class EnemySpawner : MonoBehaviour
     private int ind;
     private Vector2 spawnPoint;
 
-    Player player;
 
     private void Awake()
     {
         Player.OnStart += SpawnEnemy;
+        EnemyAIController.OnDeath += decAICount;
     }
 
     // Start is called before the first frame update
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         enemyCount++;
     }
 
-    public void decAICount()
+    private void decAICount()
     {
         enemyCount--;
     }
@@ -64,5 +64,6 @@ public class EnemySpawner : MonoBehaviour
     private void OnDisable()
     {
         Player.OnStart -= SpawnEnemy;
+        EnemyAIController.OnDeath -= decAICount;
     }
 }
