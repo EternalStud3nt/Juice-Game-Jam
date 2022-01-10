@@ -35,6 +35,7 @@ public class JuiceMeter : MonoBehaviour
     private void Update()
     {
         juice_UI.fillAmount = JuicePercent;
+        print(JuicePercent);
         if(juice == maxJuice)
         {
             player.SickoMode();
@@ -48,8 +49,9 @@ public class JuiceMeter : MonoBehaviour
         juice = 0;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         EnemyAIController.OnDeath -= AddJuice;
+        Player.OnStart -= Enable;
     }
 }
