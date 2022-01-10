@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1630703425}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5375, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718913321279311663}
   m_RootOrder: 2
@@ -62,7 +62,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 33.4209
+  orthographic size: 12.878574
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 718913321055902723}
   - component: {fileID: 3166471767081447388}
   - component: {fileID: 1471597321}
+  - component: {fileID: 2018411903}
   m_Layer: 0
   m_Name: Circle 2
   m_TagString: Pilot
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 718913321055902721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.63, y: 0.09, z: 0}
-  m_LocalScale: {x: 1.6954521, y: 1.6954521, z: 1.6954521}
+  m_LocalScale: {x: 1.4805305, y: 1.4805305, z: 1.4805305}
   m_Children: []
   m_Father: {fileID: 718913321279311663}
   m_RootOrder: 1
@@ -251,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 2420867765292838666, guid: 3876dc5f5341c9a45b4c5d805a028ab7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -280,8 +281,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &1471597321
 CircleCollider2D:
@@ -293,12 +294,31 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09640439, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4035956
+--- !u!95 &2018411903
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718913321055902721}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b78cc50f3f1165b449ee1e09d8d429ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &718913321152569555
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +331,7 @@ GameObject:
   - component: {fileID: 718913321152569557}
   - component: {fileID: 8178571249959644374}
   - component: {fileID: 957927719}
+  - component: {fileID: 1712866774}
   m_Layer: 0
   m_Name: Circle 1
   m_TagString: Pilot
@@ -327,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 718913321152569555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.46, y: 0, z: 0}
-  m_LocalScale: {x: 1.6954521, y: 1.6954521, z: 1.6954521}
+  m_LocalScale: {x: 1.4805305, y: 1.4805305, z: 1.4805305}
   m_Children: []
   m_Father: {fileID: 718913321279311663}
   m_RootOrder: 0
@@ -372,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 2420867765292838666, guid: 3876dc5f5341c9a45b4c5d805a028ab7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -391,19 +412,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718913321152569555}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!58 &957927719
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -417,9 +438,28 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05190997, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.44809005
+--- !u!95 &1712866774
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718913321152569555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b78cc50f3f1165b449ee1e09d8d429ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &718913321279311661
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,17 +512,20 @@ MonoBehaviour:
   pilot2: {fileID: 718913321055902720}
   spawnPoint: {fileID: 0}
   lineRenderer: {fileID: 718913321279311662}
-  rotationSpeed: 500
-  maxRotationSpeed: 700
-  minRotationSpeed: 300
+  rotationSpeed: 150
+  maxRotationSpeed: 500
+  minRotationSpeed: 100
   minScale: {x: 1.695452, y: 1.695452, z: 1.695452}
   maxScale: {x: 2.7, y: 2.7, z: 2.7}
   sickomodeTimer: 8
   maxDistanceBetweenPilots: 3.78
-  pullPilotSpeed: 10
+  pullPilotSpeed: 7
+  pushPilotSpeed: 15
   virCam: {fileID: 0}
   camAnim: {fileID: 1448675465}
   mainMenuUI: {fileID: 0}
+  movementForce: 50
+  maxMovementSpeed: 15
   takeInput: 0
 --- !u!120 &718913321279311662
 LineRenderer:
@@ -529,7 +572,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.566552
+    widthMultiplier: 0.324738
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -547,8 +590,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+      key1: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
       key2: {r: 0, g: 1, b: 0.41972613, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

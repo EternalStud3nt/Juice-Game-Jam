@@ -26,19 +26,13 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         spawnEnemies = true;
-        ind = Random.Range(0, enemies.Length);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SpawnEnemy()
     {
         IEnumerator SpawnEnemy_Cor()
         {
+            ind = Random.Range(0, enemies.Length);
             spawnPoint.x = Random.Range(minX, maxX);
             spawnPoint.y = Random.Range(minY, maxY);
             Instantiate(enemies[ind], spawnPoint, Quaternion.identity);

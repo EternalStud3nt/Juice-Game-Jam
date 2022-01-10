@@ -76,14 +76,14 @@ public class EnemyAIController : MonoBehaviour
         targetPos.position = hub.transform.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Hub"))
+        if (collision.CompareTag("Hub"))
         {
             reachedHub = true;
             Attack();
         }
-        if (collision.collider.CompareTag("Pilot"))
+        if (collision.CompareTag("Pilot"))
         {
             Die(true);
         }
