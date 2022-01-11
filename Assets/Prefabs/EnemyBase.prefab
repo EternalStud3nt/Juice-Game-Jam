@@ -87,6 +87,8 @@ MonoBehaviour:
   hub: {fileID: 5899299901581912553, guid: 5ca8f18b0e60af945affde9d04975722, type: 3}
   deathParticles: {fileID: 8431566253753786992, guid: 7e129bd40f4f6c54593c630e0dbb7490, type: 3}
   enemySpawner: {fileID: 4568185775549828742, guid: 109e87edc0fe89649aa1efec77e09b4c, type: 3}
+  deathSound: {fileID: 8300000, guid: a64415e74a5445146ae621f4d0bd7f68, type: 3}
+  specialDeathSound: {fileID: 8300000, guid: 57e184e5732a6414fab1d68df094632e, type: 3}
 --- !u!50 &1606815605373255458
 Rigidbody2D:
   serializedVersion: 4

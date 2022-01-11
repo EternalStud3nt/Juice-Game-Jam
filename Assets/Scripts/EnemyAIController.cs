@@ -21,7 +21,8 @@ public class EnemyAIController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private GameObject enemySpawner;
-
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip specialDeathSound;
 
     private RipplePostProcessor ripplePostProcessor;
     private bool reachedHub;
@@ -103,6 +104,7 @@ public class EnemyAIController : MonoBehaviour
             yield return new WaitForSeconds(deathTime);
             OnDeath?.Invoke();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(deathSound, transform.position);
             Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
         }
@@ -113,6 +115,10 @@ public class EnemyAIController : MonoBehaviour
             ripplePostProcessor.RippleEffect();
             OnDeath?.Invoke();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            SFXPlayer.Instance.PlaySFX(deathSound);
+            float rand = UnityEngine.Random.Range(0, 1f);
+            if (rand < 0.1f)
+                SFXPlayer.Instance.PlaySFX(specialDeathSound);
             Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
         }

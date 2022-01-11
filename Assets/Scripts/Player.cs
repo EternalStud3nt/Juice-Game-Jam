@@ -23,18 +23,21 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private float movementForce;
     [SerializeField] private float maxMovementSpeed = 15f;
+    [SerializeField] private AudioClip sawSFX;
+    [SerializeField] private AudioClip sickomodeSFX;
 
     public bool takeInput;
     public static Action<Transform> OnSwitch;
     public static Action OnStart;
 
     private Transform currentPilot;
-    Rigidbody2D rb;
-    Rigidbody2D rb2;
+    private Rigidbody2D rb;
+    private Rigidbody2D rb2;
+    private AudioSource audioSource;
     private Transform otherPilot;
     private bool pulling;
     private bool startGame;
-    Vector2 distanceBetweenPilots;
+    private Vector2 distanceBetweenPilots;
     private float rotationRadius;
     private float timer;
     private float timescale;
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         EnemyAIController.OnDeath += Screenshake;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
         OnSwitch.Invoke(currentPilot);
         rb = currentPilot.GetComponent<Rigidbody2D>();
         rb2 = otherPilot.GetComponent<Rigidbody2D>();
+        MusicPlayer.Instance.PlayMenuMusic();
     }
 
     private void SwitchPilot()
@@ -90,17 +95,6 @@ public class Player : MonoBehaviour
     {
         if (takeInput)
         {
-           //if (Input.GetButtonDown("Jump"))
-           //{
-           //    if (startGame)
-           //    {
-           //        mainMenuUI.SetActive(false);
-           //        OnStart?.Invoke();
-           //        camAnim.SetTrigger("zoomOut");
-           //        startGame = false;
-           //    }
-           //    SwitchPilot();
-           //}
             if (Input.GetKey(KeyCode.Space))
             {
                 if (startGame)
@@ -109,6 +103,7 @@ public class Player : MonoBehaviour
                     OnStart?.Invoke();
                     camAnim.SetTrigger("zoomOut");
                     startGame = false;
+                    MusicPlayer.Instance.PlayGameplayMusic();
                 }
                 if (rotationRadius > 0.5f)
                 {
@@ -120,10 +115,6 @@ public class Player : MonoBehaviour
             {
                 pulling = false;
                 msScale = 1;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                JuiceMeter.AddJuice();
             }
         }
         
@@ -166,9 +157,16 @@ public class Player : MonoBehaviour
 
     public void SickoMode()
     {
+        if (sicko)
+            return;
         IEnumerator SickoMode_Cor()
         {
             sicko = true;
+            SFXPlayer.Instance.PlaySFX(sickomodeSFX);
+            yield return new WaitForSeconds(3f);
+            maxMovementSpeed = 30f;
+            MusicPlayer.Instance.PlaySickoMode();
+            PlaySawSFX(true);
             timescale = 5;
             pilot1.localScale = maxScale;
             pilot2.localScale = maxScale;
@@ -176,9 +174,21 @@ public class Player : MonoBehaviour
             pilot1.localScale = minScale;
             pilot2.localScale = minScale;
             sicko = false;
+            MusicPlayer.Instance.PlayGameplayMusic();
             JuiceMeter.ResetJuice();
+            PlaySawSFX(false);
+            maxMovementSpeed = 15f;
+
         }
         StartCoroutine(SickoMode_Cor());
+    }
+
+    private void PlaySawSFX(bool v)
+    {
+        if (v)
+            audioSource.Play();
+        else
+            audioSource.Stop();
     }
 
     private void OnDrawGizmos()
