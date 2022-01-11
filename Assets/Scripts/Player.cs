@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     private Vector2 movementInput;
     private float msScale;
     private bool sicko;
+    public float forceScale = 1; // for better steering while in sicko
+
 
     private void Awake()
     {
@@ -134,7 +136,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateRotation();
-        rb.AddForce(movementInput * movementForce);
+        rb.AddForce(movementInput * movementForce * forceScale);
         if (rb.velocity.magnitude >= maxMovementSpeed * msScale)
             rb.velocity = rb.velocity.normalized * maxMovementSpeed * msScale;
     }
@@ -162,6 +164,7 @@ public class Player : MonoBehaviour
         IEnumerator SickoMode_Cor()
         {
             sicko = true;
+            forceScale = 5;
             SFXPlayer.Instance.PlaySFX(sickomodeSFX);
             yield return new WaitForSeconds(3f);
             maxMovementSpeed = 30f;
@@ -174,6 +177,7 @@ public class Player : MonoBehaviour
             pilot1.localScale = minScale;
             pilot2.localScale = minScale;
             sicko = false;
+            forceScale = 1;
             MusicPlayer.Instance.PlayGameplayMusic();
             JuiceMeter.ResetJuice();
             PlaySawSFX(false);

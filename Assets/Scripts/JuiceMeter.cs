@@ -12,6 +12,7 @@ public class JuiceMeter : MonoBehaviour
     private const float maxJuice = 1000;
     public static float JuicePercent { get { return juice / maxJuice; } }
     public static Action OnSickoMode;
+    private new static bool enabled;
 
     [SerializeField] Player player;
 
@@ -36,10 +37,11 @@ public class JuiceMeter : MonoBehaviour
     {
         juice_UI.fillAmount = JuicePercent;
         print(JuicePercent);
-        if(juice == maxJuice)
+        if(juice >= maxJuice && !enabled)
         {
             player.SickoMode();
             OnSickoMode?.Invoke();
+            enabled = true;
         }
        
     }
@@ -47,6 +49,7 @@ public class JuiceMeter : MonoBehaviour
     public static void ResetJuice()
     {
         juice = 0;
+        enabled = false;
     }
 
     private void OnDestroy()

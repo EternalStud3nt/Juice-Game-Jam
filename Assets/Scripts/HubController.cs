@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HubController : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private Image hpBar;
 
     [Header("Other")]
+    [SerializeField] public AudioClip damageSound;
     [SerializeField] public float hubRadius = 5f;
     [SerializeField] private int initHealth;
     private int health = 100;
@@ -21,22 +24,18 @@ public class HubController : MonoBehaviour
         endGamePanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int damage)
     {
         if(health > 0)
         {
             health -= damage;
+            SFXPlayer.Instance.PlaySFX(damageSound);
         }
         else
         {
             EndGame();
         }
+        hpBar.fillAmount = (float)health / initHealth;
     }
 
     private void EndGame()

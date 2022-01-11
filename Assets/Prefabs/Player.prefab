@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1630703428}
   - component: {fileID: 1630703427}
-  - component: {fileID: 1630703426}
   - component: {fileID: 1630703429}
   - component: {fileID: 880460931}
   - component: {fileID: 880460932}
@@ -78,14 +77,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1630703426
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630703425}
-  m_Enabled: 1
 --- !u!114 &1630703429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,8 +521,8 @@ MonoBehaviour:
   pilot2: {fileID: 718913321055902720}
   spawnPoint: {fileID: 0}
   lineRenderer: {fileID: 718913321279311662}
-  rotationSpeed: 300
-  maxRotationSpeed: 500
+  rotationSpeed: 400
+  maxRotationSpeed: 600
   minScale: {x: 2.5, y: 2.5, z: 2.5}
   maxScale: {x: 3.2, y: 3.3, z: 3.3}
   sickomodeTimer: 8
@@ -546,6 +537,7 @@ MonoBehaviour:
   sawSFX: {fileID: 8300000, guid: 854273bde9d3657498f2bfb62dd4bb23, type: 3}
   sickomodeSFX: {fileID: 8300000, guid: 95d6cb9447852d549a99fdfcb46696c6, type: 3}
   takeInput: 0
+  forceScale: 1
 --- !u!120 &718913321279311662
 LineRenderer:
   m_ObjectHideFlags: 0

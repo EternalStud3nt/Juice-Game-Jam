@@ -92,8 +92,14 @@ public class EnemyAIController : MonoBehaviour
 
     private void Attack()
     {
-        hub.GetComponent<HubController>().TakeDamage(damage);
-        Die();
+        IEnumerator Attack_Cor()
+        {
+            yield return new WaitForSeconds(deathTime);
+            hub.GetComponent<HubController>().TakeDamage(damage);
+            Die(true);
+        }
+
+        StartCoroutine(Attack_Cor());
     }
 
     public void Die(bool instant = false)
@@ -116,9 +122,6 @@ public class EnemyAIController : MonoBehaviour
             OnDeath?.Invoke();
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             SFXPlayer.Instance.PlaySFX(deathSound);
-            float rand = UnityEngine.Random.Range(0, 1f);
-            if (rand < 0.1f)
-                SFXPlayer.Instance.PlaySFX(specialDeathSound);
             Destroy(targetPos.gameObject);
             Destroy(this.gameObject);
         }
